@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#164e3b" />
+  <meta name="description" content="TAPAK DESA — Sistem pendukung keputusan kelayakan usaha Koperasi Desa/Kelurahan Merah Putih." />
+  <title>TAPAK DESA — Kelayakan Usaha Koperasi</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="TAPAK DESA beranda">
+        <span class="brand-mark">T</span>
+        <span><strong>TAPAK DESA</strong><small>Ruang keputusan usaha desa</small></span>
+      </a>
+      <div class="village-switcher">
+        <span class="eyebrow">KOPERASI AKTIF</span>
+        <strong id="coopNameSide">Koperasi Maju Bersama</strong>
+        <small id="villageNameSide">Desa Sukamaju · Jawa Timur</small>
+      </div>
+      <nav class="nav-menu" aria-label="Navigasi utama">
+        <span class="nav-label">MENU UTAMA</span>
+        <button class="nav-link active" data-page="dashboard"><span class="nav-icon">▦</span> Ringkasan</button>
+        <button class="nav-link" data-page="potensi"><span class="nav-icon">⌖</span> Potensi Desa</button>
+        <button class="nav-link" data-page="iped"><span class="nav-icon">◈</span> Penilaian IPED</button>
+        <button class="nav-link" data-page="pasar"><span class="nav-icon">⌁</span> Validasi Pasar</button>
+        <button class="nav-link" data-page="analisis"><span class="nav-icon">∑</span> Analisis Usaha</button>
+        <button class="nav-link" data-page="perbandingan"><span class="nav-icon">⇄</span> Perbandingan</button>
+        <button class="nav-link" data-page="monitoring"><span class="nav-icon">↗</span> Monitoring</button>
+        <span class="nav-label nav-label-spaced">PENGELOLAAN</span>
+        <button class="nav-link" data-page="profil"><span class="nav-icon">◎</span> Profil Koperasi</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-icon">✳</span><strong>Mulai dari data nyata</strong><p>Gunakan hasil survei dan bukti pasar yang dapat diverifikasi.</p></div>
+        <div class="sidebar-foot">TAPAK DESA <span>·</span> Prototype MVP 0.1</div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="Buka menu">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="pageCrumb">Ringkasan</strong></div>
+        <div class="topbar-actions">
+          <span class="save-state" id="saveState"><i></i> Tersimpan di perangkat</span>
+          <button class="avatar" id="profileShortcut" title="Profil koperasi">KM</button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page active" id="page-dashboard">
+          <div class="page-heading heading-with-action">
+            <div><span class="eyebrow green">PUSAT KENDALI KELAYAKAN</span><h1>Selamat datang, pengelola koperasi.</h1><p>Gunakan data lokal untuk menentukan usaha yang tepat, bukan sekadar mengikuti tren.</p></div>
+            <div class="heading-actions"><button class="btn btn-secondary" data-go="iped">Lihat penilaian IPED</button><button class="btn btn-primary" data-go="analisis">＋ Tambah analisis usaha</button></div>
+          </div>
+          <div class="summary-grid">
+            <article class="metric-card"><div class="metric-top"><span>Alternatif usaha</span><span class="metric-icon sage">⌘</span></div><strong id="metricAlternatives">3</strong><small>Telah didaftarkan</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Layak / potensial</span><span class="metric-icon mint">✓</span></div><strong id="metricFeasible">1</strong><small>Memenuhi gerbang kritis</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Perlu perbaikan</span><span class="metric-icon amber">△</span></div><strong id="metricImprove">2</strong><small>Masih ada prasyarat</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Data potensi</span><span class="metric-icon blue">⌖</span></div><strong id="metricPotensi">6</strong><small>Catatan potensi desa</small></article>
+          </div>
+          <div class="dashboard-grid">
+            <article class="panel panel-large">
+              <div class="panel-heading"><div><h2>Portofolio alternatif usaha</h2><p>Ringkasan status kelayakan setiap rencana usaha.</p></div><button class="text-button" data-go="perbandingan">Lihat perbandingan ↗</button></div>
+              <div id="portfolioList" class="portfolio-list"></div>
+            </article>
+            <article class="panel panel-profile">
+              <div class="panel-heading"><div><h2>Profil wilayah</h2><p>Informasi dasar koperasi</p></div><button class="more-button" data-go="profil">•••</button></div>
+              <div class="profile-location"><span class="location-mark">⌖</span><div><strong id="dashVillage">Desa Sukamaju</strong><small id="dashDistrict">Kecamatan Sukamaju, Jawa Timur</small></div></div>
+              <div class="profile-stats"><div><small>Anggota koperasi</small><strong id="dashMembers">245 orang</strong></div><div><small>Potensi utama</small><strong id="dashMainPotential">Pertanian</strong></div></div>
+              <div class="profile-note"><span>i</span><p>Lengkapi profil dan data desa untuk meningkatkan kualitas rekomendasi.</p></div>
+            </article>
+          </div>
+          <article class="panel next-panel"><div class="next-icon">✦</div><div><strong>Langkah berikutnya</strong><p>Periksa kembali bukti permintaan dan pemasok untuk setiap alternatif sebelum keputusan investasi.</p></div><button class="btn btn-secondary" data-go="pasar">Validasi pasar</button></article>
+          <p class="disclaimer">Data contoh ditampilkan untuk demonstrasi. Hasil TAPAK DESA merupakan rekomendasi analitis, bukan keputusan pembiayaan atau pengesahan kelayakan resmi.</p>
+        </section>
+
+<section class="page" id="page-iped">
+  <div class="page-heading heading-with-action"><div><span class="eyebrow green">MESIN ANALISIS POTENSI · VERSI 0.2</span><h1>Penilaian IPED dan peluang usaha KDMP</h1><p>Ukur potensi sektor, dokumentasikan bukti, lalu susun prioritas usaha koperasi secara transparan.</p></div><div class="heading-actions"><button class="btn btn-secondary" id="ipedPrintReport">Cetak laporan</button><button class="btn btn-primary" id="ipedSuggestOpps">Buat alternatif dari sektor unggulan</button></div></div>
+  <div class="notice notice-info"><span>i</span><div><strong>Petunjuk penggunaan dan batas interpretasi.</strong><p>Isi skor berdasarkan rubrik internal dan bukti lapangan, bukan perkiraan. Bobot AHP awal sama rata dan belum merupakan hasil penilaian ahli. Skor sektor yang belum lengkap atau AHP dengan CR di atas 0,10 hanya bersifat sementara. Instrumen ini bukan indeks resmi pemerintah.</p></div></div>
+  <div class="iped-kpi-grid"><article class="metric-card"><div class="metric-top"><span>Rata-rata sektor terisi</span><span class="metric-icon mint">◈</span></div><strong id="ipedOverall">—</strong><small id="ipedSectorCount">Belum ada sektor dinilai</small></article><article class="metric-card"><div class="metric-top"><span>Metode</span><span class="metric-icon blue">∑</span></div><strong>AHP + WS</strong><small>Bobot dan skor terukur</small></article><article class="metric-card"><div class="metric-top"><span>Alternatif KDMP</span><span class="metric-icon amber">⌂</span></div><strong id="ipedOppCount">Dinamis</strong><small>Dinilai melalui IPUK</small></article></div>
+  <article class="panel"><div class="panel-heading"><div><h2>A. Pembobotan AHP — IPED</h2><p>Bandingkan dimensi pada baris pertama terhadap dimensi kedua. Nilai 1–9 berarti lebih penting; nilai 1/2–1/9 berarti dimensi kedua lebih penting.</p></div><span class="tag tag-neutral">Skala Saaty</span></div><div id="ahpIPEDPairs" class="iped-pair-grid"></div><div class="iped-help" id="ipedAHPStatus">CR belum dihitung. Gunakan tombol hitung setelah meninjau matriks.</div></article>
+  <article class="panel"><div class="panel-heading"><div><h2>B. Penilaian sektor dan bukti</h2><p>Nilai setiap dimensi pada skala 0–100, lalu catat dasar penilaian, sumber, dan tahun data agar hasil dapat diaudit.</p></div><span class="tag tag-neutral">6 sektor</span></div><div class="notice notice-warn"><span>!</span><p>Jangan mengisi skor hanya berdasarkan persepsi. Lampirkan sumber, periode, dan bukti. Indikator sektoral rinci perlu disesuaikan sebelum survei lapangan.</p></div><div id="ipedSectorInputs" class="iped-sector-list"></div></article>
+  <article class="panel"><div class="panel-heading"><div><h2>C. Hasil Indeks Potensi Ekonomi Desa</h2><p>Hasil disertai kelengkapan data dan status konsistensi AHP. Jangan gunakan skor parsial sebagai dasar tunggal investasi.</p></div><button class="btn btn-secondary btn-small" id="ipedRecalculate">Hitung ulang & cek CR</button></div><div id="ipedSectorResults" class="iped-results"></div><p class="iped-help" id="ipedDataQuality">Belum ada data penilaian.</p></article>
+  <article class="panel"><div class="panel-heading"><div><h2>D. Pembobotan AHP — IPUK</h2><p>Tentukan bobot enam dimensi untuk membandingkan alternatif usaha. Bobot IPUK terpisah dari IPED.</p></div><span class="tag tag-neutral">Skala Saaty</span></div><div id="ahpIPUKPairs" class="iped-pair-grid"></div></article>
+  <article class="panel"><div class="panel-heading"><div><h2>E. Alternatif unit usaha KDMP</h2><p>Tambahkan alternatif yang relevan dengan potensi lokal. Skor setiap dimensi 0–100 dan centang gerbang hanya jika sudah ada bukti.</p></div></div><div class="iped-add-row"><label>Sektor<select id="ipedOpportunitySector"><option value="pertanian">Pertanian dan perkebunan</option><option value="peternakan">Peternakan</option><option value="perikanan">Perikanan dan kelautan</option><option value="industri">Industri pengolahan dan UMKM</option><option value="perdagangan">Perdagangan dan jasa</option><option value="pariwisata">Pariwisata dan ekonomi kreatif</option></select></label><label>Nama alternatif usaha<input id="ipedOpportunityName" placeholder="Contoh: Agregasi hasil panen" list="ipedBusinessSuggestions"/></label><datalist id="ipedBusinessSuggestions"><option value="Agregasi hasil panen"><option value="Penyediaan sarana produksi pertanian"><option value="Pengeringan dan penyimpanan hasil"><option value="Pengadaan kebutuhan pokok"><option value="Pengadaan pakan ternak"><option value="Distribusi hasil perikanan"><option value="Pengadaan bahan baku UMKM"></datalist><button class="btn btn-primary" id="ipedAddOpportunity">＋ Tambah alternatif</button></div><div id="ipedOpportunities" class="iped-opportunity-list"></div></article>
+  <article class="panel"><div class="panel-heading"><div><h2>F. Ekspor dan dokumentasi</h2><p>Data IPED tersimpan di browser ini secara terpisah dari data MVP. Ekspor cadangan secara berkala. Penyimpanan belum tersinkron antarperangkat.</p></div></div><div class="iped-export-row"><span id="ipedSaveState">Tersimpan di perangkat ini</span><div><button class="btn btn-secondary" id="ipedExport">Ekspor data IPED</button><label class="btn btn-ghost file-label">Impor data IPED<input type="file" id="ipedImport" accept="application/json" hidden></label></div></div></article>
+  <p class="disclaimer">IPED/IPUK merupakan rancangan instrumen analitis TAPAK DESA. Validasi indikator, rubrik, bobot AHP, batas kategori, dan gerbang kritis harus dilakukan melalui konsultasi ahli serta uji coba lapangan sebelum digunakan untuk keputusan investasi.</p>
+</section>
+
+        <section class="page" id="page-potensi">
+          <div class="page-heading"><span class="eyebrow green">TAHAP 01</span><h1>Peta potensi desa</h1><p>Catat sumber daya, kebutuhan masyarakat, dan pelaku ekonomi yang dapat menjadi dasar pengembangan usaha.</p></div>
+          <div class="two-column-layout">
+            <article class="panel"><div class="panel-heading"><div><h2>Tambah data potensi</h2><p>Masukkan informasi yang bersumber dari survei atau data resmi.</p></div></div>
+              <form id="potentialForm" class="form-grid">
+                <label>Nama potensi<input name="name" required placeholder="Contoh: Produksi padi" /></label>
+                <label>Kategori<select name="category" required><option value="Pertanian">Pertanian</option><option value="Peternakan">Peternakan</option><option value="Perikanan">Perikanan</option><option value="Perdagangan">Perdagangan</option><option value="UMKM">UMKM</option><option value="Infrastruktur">Infrastruktur</option><option value="Kebutuhan masyarakat">Kebutuhan masyarakat</option></select></label>
+                <label>Jumlah / kapasitas<input name="amount" placeholder="Contoh: 120 ton per musim" /></label>
+                <label>Sumber data<select name="source"><option>Survei lapangan</option><option>BPS</option><option>Pemerintah desa</option><option>Kelompok tani / UMKM</option><option>Data koperasi</option><option>Lainnya</option></select></label>
+                <label class="full-field">Catatan / keterangan<textarea name="notes" rows="3" placeholder="Jelaskan kondisi, musim, atau bukti pendukung..."></textarea></label>
+                <div class="form-actions full-field"><button class="btn btn-primary" type="submit">＋ Simpan potensi</button></div>
+              </form>
+            </article>
+            <article class="panel insight-panel"><span class="eyebrow green">PANDUAN PENGISIAN</span><h2>Data yang baik menghasilkan keputusan yang lebih baik.</h2><p>Hindari mengisi potensi hanya berdasarkan perkiraan. Cantumkan sumber, periode, dan satuan agar data dapat diperiksa kembali.</p><div class="tip-row"><span>01</span><div><strong>Gunakan data terukur</strong><small>Jumlah produksi, volume kebutuhan, atau kapasitas.</small></div></div><div class="tip-row"><span>02</span><div><strong>Catat sumbernya</strong><small>Siapa yang memberikan data dan kapan diperoleh.</small></div></div><div class="tip-row"><span>03</span><div><strong>Perbarui secara berkala</strong><small>Potensi dan kebutuhan dapat berubah mengikuti musim.</small></div></div></article>
+          </div>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Data potensi tersimpan</h2><p id="potentialCount">0 catatan</p></div></div><div class="table-wrap"><table><thead><tr><th>Potensi</th><th>Kategori</th><th>Jumlah / kapasitas</th><th>Sumber</th><th></th></tr></thead><tbody id="potentialTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-pasar">
+          <div class="page-heading"><span class="eyebrow green">TAHAP 02</span><h1>Validasi pasar</h1><p>Uji apakah kebutuhan, calon pembeli, dan pemasok benar-benar tersedia sebelum usaha dijalankan.</p></div>
+          <div class="notice notice-info"><span>i</span><div><strong>Bedakan minat dengan komitmen.</strong><p>Survei minat tidak setara dengan pesanan pembelian. Catat jenis bukti secara jujur agar proyeksi penjualan tidak berlebihan.</p></div></div>
+          <article class="panel"><div class="panel-heading"><div><h2>Catat bukti pasar</h2><p>Hubungkan bukti dengan alternatif unit usaha.</p></div></div>
+            <form id="marketForm" class="form-grid">
+              <label>Alternatif usaha<select name="businessId" id="marketBusinessSelect" required></select></label>
+              <label>Jenis bukti<select name="evidence" required><option value="Indikatif">Indikatif — survei / wawancara</option><option value="Terkonfirmasi">Terkonfirmasi — transaksi / penawaran</option><option value="Komitmen">Komitmen — pesanan / perjanjian</option></select></label>
+              <label>Nama pihak / responden<input name="party" required placeholder="Contoh: Kelompok Tani Makmur" /></label>
+              <label>Peran pihak<select name="role"><option>Calon pembeli</option><option>Pemasok</option><option>Mitra distribusi</option><option>Pesaing / pelaku usaha</option><option>Anggota / konsumen</option></select></label>
+              <label>Volume / nilai kebutuhan<input name="volume" placeholder="Contoh: 2 ton per bulan" /></label>
+              <label>Tanggal bukti<input name="date" type="date" /></label>
+              <label class="full-field">Keterangan dan referensi bukti<textarea name="notes" rows="3" placeholder="Catat hasil wawancara, nomor dokumen, atau lokasi bukti. Jangan masukkan data pribadi sensitif."></textarea></label>
+              <div class="form-actions full-field"><button class="btn btn-primary" type="submit">＋ Simpan bukti pasar</button></div>
+            </form>
+          </article>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Daftar bukti pasar</h2><p>Catatan validasi untuk setiap alternatif.</p></div></div><div class="table-wrap"><table><thead><tr><th>Alternatif</th><th>Pihak</th><th>Peran</th><th>Tingkat bukti</th><th>Volume / nilai</th><th></th></tr></thead><tbody id="marketTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-analisis">
+          <div class="page-heading"><span class="eyebrow green">TAHAP 03</span><h1>Analisis kelayakan usaha</h1><p>Daftarkan alternatif usaha dan uji aspek pasar, operasional, manajemen, keuangan, legalitas, serta sosial-lingkungan.</p></div>
+          <div class="two-column-layout analysis-layout">
+            <article class="panel"><div class="panel-heading"><div><h2>Data alternatif usaha</h2><p>Isi asumsi dasar dan indikator kelayakan.</p></div></div>
+              <form id="businessForm" class="form-grid">
+                <input type="hidden" name="id" />
+                <label class="full-field">Nama unit usaha<input name="name" required placeholder="Contoh: Perdagangan hasil pertanian" /></label>
+                <label>Kategori usaha<select name="category"><option>Perdagangan</option><option>Pertanian</option><option>Peternakan</option><option>Perikanan</option><option>Jasa</option><option>Penyimpanan / logistik</option><option>Lainnya</option></select></label>
+                <label>Modal awal (Rp)<input name="investment" type="number" min="0" required placeholder="100000000" /></label>
+                <label>Harga jual per unit (Rp)<input name="price" type="number" min="0" required placeholder="10000" /></label>
+                <label>Biaya variabel per unit (Rp)<input name="variableCost" type="number" min="0" required placeholder="7500" /></label>
+                <label>Biaya tetap per bulan (Rp)<input name="fixedCost" type="number" min="0" required placeholder="5000000" /></label>
+                <label>Perkiraan permintaan / bulan<input name="demand" type="number" min="0" required placeholder="3000" /></label>
+                <label>Target penjualan / bulan<input name="sales" type="number" min="0" required placeholder="2500" /></label>
+                <label>Skor pasar (1–5)<input name="marketScore" type="number" min="1" max="5" value="3" required /></label>
+                <label>Skor teknis (1–5)<input name="technicalScore" type="number" min="1" max="5" value="3" required /></label>
+                <label>Skor manajemen (1–5)<input name="managementScore" type="number" min="1" max="5" value="3" required /></label>
+                <label>Skor sosial-lingkungan (1–5)<input name="socialScore" type="number" min="1" max="5" value="3" required /></label>
+                <label class="check-label"><input name="supplierReady" type="checkbox" /> Pemasok terverifikasi / tersedia</label>
+                <label class="check-label"><input name="buyerReady" type="checkbox" /> Bukti permintaan pasar memadai</label>
+                <label class="check-label"><input name="legalReady" type="checkbox" /> Persyaratan legalitas kritis terpenuhi</label>
+                <label class="check-label"><input name="managerReady" type="checkbox" /> Pengelola dan SOP tersedia</label>
+                <div class="form-actions full-field"><button class="btn btn-primary" type="submit">Hitung & simpan analisis</button><button class="btn btn-ghost" type="button" id="resetBusinessForm">Bersihkan</button></div>
+              </form>
+            </article>
+            <aside class="panel result-preview"><span class="eyebrow green">PRATINJAU PERHITUNGAN</span><h2>Indikator finansial</h2><p>Nilai dihitung otomatis dari asumsi yang dimasukkan.</p><div class="calc-item"><small>Margin kontribusi / unit</small><strong id="previewMargin">Rp0</strong></div><div class="calc-item"><small>BEP / bulan</small><strong id="previewBep">—</strong></div><div class="calc-item"><small>Estimasi laba operasional / bulan</small><strong id="previewProfit">Rp0</strong></div><div class="calc-item"><small>Estimasi omzet / bulan</small><strong id="previewRevenue">Rp0</strong></div><div class="notice notice-warn"><span>!</span><p>Hasil merupakan simulasi sederhana. Pajak, depresiasi, biaya pembiayaan, perubahan harga, dan modal kerja perlu dianalisis lebih lanjut.</p></div></aside>
+          </div>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Alternatif usaha tersimpan</h2><p>Tekan edit untuk memperbarui data analisis.</p></div></div><div class="table-wrap"><table><thead><tr><th>Nama usaha</th><th>Skor</th><th>BEP / bulan</th><th>Estimasi laba / bulan</th><th>Status</th><th></th></tr></thead><tbody id="businessTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-perbandingan">
+          <div class="page-heading"><span class="eyebrow green">TAHAP 04</span><h1>Perbandingan alternatif</h1><p>Bandingkan skor dan persyaratan kritis. Sistem membantu memberi gambaran, keputusan tetap melalui Rapat Anggota.</p></div>
+          <article class="panel"><div class="panel-heading"><div><h2>Hasil penilaian alternatif</h2><p>Bobot awal: pasar 25%, keuangan 25%, teknis 15%, manajemen 15%, legalitas 10%, sosial-lingkungan 10%.</p></div><span class="tag tag-neutral">Bobot dapat divalidasi</span></div><div id="comparisonCards" class="comparison-grid"></div></article>
+          <article class="panel"><div class="panel-heading"><div><h2>Matriks perbandingan</h2><p>Skor berbobot dan gerbang kritis setiap alternatif.</p></div></div><div class="table-wrap"><table><thead><tr><th>Alternatif</th><th>Skor pasar</th><th>Skor teknis</th><th>Skor manajemen</th><th>Skor total</th><th>Gerbang kritis</th><th>Status</th></tr></thead><tbody id="comparisonTable"></tbody></table></div></article>
+          <div class="notice notice-info"><span>i</span><div><strong>Catatan metodologi</strong><p>Skor total menggunakan skala 1–5. Legalitas, kesiapan pemasok, bukti pasar, dan pengelola diperlakukan sebagai gerbang kritis. Skor agregat tidak boleh menutupi kegagalan persyaratan wajib.</p></div></div>
+        </section>
+
+        <section class="page" id="page-monitoring">
+          <div class="page-heading"><span class="eyebrow green">TAHAP 05</span><h1>Monitoring usaha</h1><p>Catat realisasi agar koperasi dapat membandingkan rencana dengan kinerja setelah usaha beroperasi.</p></div>
+          <article class="panel"><div class="panel-heading"><div><h2>Input realisasi bulanan</h2><p>Catat omzet, biaya operasional, dan catatan kendala.</p></div></div>
+            <form id="monitorForm" class="form-grid">
+              <label>Unit usaha<select name="businessId" id="monitorBusinessSelect" required></select></label>
+              <label>Periode<input name="period" type="month" required /></label>
+              <label>Realisasi omzet (Rp)<input name="revenue" type="number" min="0" required /></label>
+              <label>Realisasi biaya (Rp)<input name="cost" type="number" min="0" required /></label>
+              <label class="full-field">Catatan kendala / tindak lanjut<textarea name="notes" rows="3" placeholder="Contoh: pasokan terlambat, penjualan menurun..."></textarea></label>
+              <div class="form-actions full-field"><button class="btn btn-primary" type="submit">＋ Simpan realisasi</button></div>
+            </form>
+          </article>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Riwayat monitoring</h2><p>Realisasi yang telah dicatat.</p></div><button class="btn btn-secondary btn-small" id="exportCsv">Unduh CSV</button></div><div class="table-wrap"><table><thead><tr><th>Periode</th><th>Unit usaha</th><th>Omzet</th><th>Biaya</th><th>Surplus / defisit</th><th>Catatan</th><th></th></tr></thead><tbody id="monitorTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-profil">
+          <div class="page-heading"><span class="eyebrow green">PENGELOLAAN</span><h1>Profil koperasi</h1><p>Informasi dasar yang digunakan pada ringkasan dan laporan TAPAK DESA.</p></div>
+          <article class="panel profile-form-panel"><form id="profileForm" class="form-grid">
+            <label>Nama koperasi<input name="coopName" required /></label><label>Nama desa / kelurahan<input name="village" required /></label><label>Kecamatan<input name="district" /></label><label>Kabupaten / kota<input name="regency" /></label><label>Provinsi<input name="province" /></label><label>Jumlah anggota<input name="members" type="number" min="0" /></label><label>Potensi ekonomi utama<input name="mainPotential" placeholder="Contoh: Pertanian" /></label><label>Nama pengelola<input name="manager" placeholder="Nama / jabatan" /></label>
+            <div class="form-actions full-field"><button class="btn btn-primary" type="submit">Simpan profil</button></div>
+          </form></article>
+          <article class="panel data-tools"><div><h2>Data dan privasi</h2><p>Versi MVP menyimpan data di penyimpanan lokal browser perangkat ini. Data belum tersinkron otomatis ke perangkat lain atau server.</p></div><div class="tool-actions"><button class="btn btn-secondary" id="exportJson">Ekspor cadangan JSON</button><label class="btn btn-ghost file-label">Impor cadangan JSON<input type="file" id="importJson" accept="application/json" hidden /></label><button class="btn btn-danger" id="resetAll">Hapus seluruh data lokal</button></div></article>
+        </section>
+
+        <footer class="app-footer"><span>© 2026 TAPAK DESA · Prototype IPED 0.2 untuk uji coba dan pengembangan.</span><span>Berpijak pada potensi, bertumbuh melalui kelayakan.</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <script src="/app.js"></script>
+  <script src="/iped.js"></script>
+</body>
+</html>
