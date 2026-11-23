@@ -1,0 +1,13 @@
+{
+  "name": "TAPAK DESA — Kelayakan Usaha Koperasi",
+  "short_name": "TAPAK DESA",
+  "description": "Sistem pendukung keputusan kelayakan usaha Koperasi Desa/Kelurahan Merah Putih.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f8f6",
+  "theme_color": "#164e3b",
+  "icons": [
+    {"src":"/assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
